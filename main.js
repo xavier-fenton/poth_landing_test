@@ -10,23 +10,35 @@ const camera = new THREE.PerspectiveCamera(
   1000
 )
 
-const renderer = new THREE.WebGLRenderer()
+const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
+console.log(renderer)
 document.body.appendChild(renderer.domElement)
 
-// const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-// const cube = new THREE.Mesh(geometry, material)
-// scene.add(cube)
+renderer.domElement.style.height = '100dvh'
 
 camera.position.z = 5
+camera.position.y = 0.3
+
 const assestLoader = new GLTFLoader()
+
+let mixer
+
+let model
 
 assestLoader.load(
   title_url.href,
   function (gtlf) {
-    const model = gtlf.scene
-    // model.material = material
+    model = gtlf.scene
+
+    mixer = new THREE.AnimationMixer(model)
+    const clips = gtlf.animations
+
+    const clip = THREE.AnimationClip.findByName(clips, 'title_pulse')
+
+    const action = mixer.clipAction(clip)
+    action.play()
+
     scene.add(model)
   },
   undefined,
@@ -35,9 +47,21 @@ assestLoader.load(
   }
 )
 
+let clock = new THREE.Clock()
+
+function changeCanvasSize() {
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  })
+}
+
 function animate() {
   requestAnimationFrame(animate)
-
+  mixer.update(clock.getDelta())
+  changeCanvasSize()
+  if (model) {
+    model.rotation.y -= 0.005
+  }
   renderer.render(scene, camera)
 }
 animate()
