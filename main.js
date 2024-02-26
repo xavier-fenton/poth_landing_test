@@ -12,7 +12,6 @@ const camera = new THREE.PerspectiveCamera(
 
 const renderer = new THREE.WebGLRenderer({ alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
-console.log(renderer)
 document.body.appendChild(renderer.domElement)
 
 renderer.domElement.style.height = '100dvh'
@@ -57,11 +56,13 @@ function changeCanvasSize() {
 
 function animate() {
   requestAnimationFrame(animate)
-  mixer.update(clock.getDelta())
   changeCanvasSize()
   if (model) {
     model.rotation.y -= 0.005
   }
   renderer.render(scene, camera)
+  if (mixer != null || undefined) {
+    mixer.update(clock.getDelta())
+  }
 }
 animate()
