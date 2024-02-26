@@ -8,3 +8,6 @@ install dependicies then run :
 npm i 
 npx vite
 ```
+
+# Without local
+Or check out the vercel deployment here: [poth_landing_test](https://poth-landing-test.vercel.app/)
