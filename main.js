@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-const title_url = new URL('assests/partyonthehill.com.glb', import.meta.url)
+const title_url = new URL('partyonthehill.com.glb', import.meta.url)
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
   75,
