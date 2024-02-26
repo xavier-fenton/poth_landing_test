@@ -1,1 +1,5 @@
 /node_modules
+
+
+#ignore local build files
+/dist

@@ -1,7 +1,14 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+// import obj_url from './public/assests/partyonthehill.com.glb'
 
-const title_url = new URL('partyonthehill.com.glb', import.meta.url)
+const title_url = new URL(
+  'public/assests/partyonthehill.com.glb',
+  import.meta.url
+)
+
+// let title_url =toString(obj_url)
+// const title_url = obj_url
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(
   75,
