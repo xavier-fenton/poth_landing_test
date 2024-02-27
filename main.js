@@ -39,6 +39,7 @@ assestLoader.load(
 
     mixer = new THREE.AnimationMixer(model)
     const clips = gtlf.animations
+    // console.log(clips)
 
     const clip = THREE.AnimationClip.findByName(clips, 'title_pulse')
 
@@ -69,7 +70,9 @@ function animate() {
   }
   renderer.render(scene, camera)
   if (mixer != null || undefined) {
-    mixer.update(clock.getDelta())
+    setInterval(() => {
+      mixer.update(clock.getDelta())
+    }, 7000)
   }
 }
 animate()
